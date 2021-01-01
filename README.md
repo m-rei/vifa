@@ -69,7 +69,3 @@ channels are unique for all users of vifa. each channel's content gets periodica
 channel content older than a week gets removed, so you only have access to the latest content!
 
 this app is a more general purpose version of my [similar project](https://github.com/m-rei/youtube-feeds)!
-
-## attribution
-
-favicon made by [Freepik](https://www.flaticon.com/authors/freepik) from www.flaticon.com
