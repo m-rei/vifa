@@ -1,0 +1,51 @@
+{{define "content"}}
+<div>
+    <div class="flex f-row jc-around">
+        <div class="flex f-col jc-center ai-center">
+            <p class="overall mb0"><b>Overall</b></p>
+            <p class="large"><b>{{(index .stats 3).Accounts}}</b></p>
+            <sup>Accounts</sup>
+            <p class="large"><b>{{(index .stats 3).Channels}}</b></p>
+            <sup>Channels</sup>
+            <p class="large"><b>{{(index .stats 3).Contents}}</b></p>
+            <sup>Contents</sup>
+        </div>
+    </div>
+    <hr>
+    <div class="flex f-row jc-around">
+        <div class="flex f-col jc-center ai-center">
+            <svg id="youtube" role="img" viewBox="0 0 24 24" style="fill:var(--fill-col);">
+                <path d="{{(index .media 0).svgdata}}"/>
+            </svg>
+            <p class="large"><b>{{(index .stats 0).Accounts}}</b></p>
+            <sup>Accounts</sup>
+            <p class="large"><b>{{(index .stats 0).Channels}}</b></p>
+            <sup>Channels</sup>
+            <p class="large"><b>{{(index .stats 0).Contents}}</b></p>
+            <sup>Contents</sup>
+        </div>
+        <div class="flex f-col jc-center ai-center">
+            <svg id="reddit" role="img" viewBox="0 0 24 24" style="fill:var(--fill-col);">
+                <path d="{{(index .media 1).svgdata}}"/>
+            </svg>
+            <p class="large"><b>{{(index .stats 1).Accounts}}</b></p>
+            <sup>Accounts</sup>
+            <p class="large"><b>{{(index .stats 1).Channels}}</b></p>
+            <sup>Channels</sup>
+            <p class="large"><b>{{(index .stats 1).Contents}}</b></p>
+            <sup>Contents</sup>
+        </div>
+        <div class="flex f-col jc-center ai-center">
+            <svg id="twitter" role="img" viewBox="0 0 24 24" style="fill:var(--fill-col);">
+                <path d="{{(index .media 2).svgdata}}"/>
+            </svg>
+            <p class="large"><b>{{(index .stats 2).Accounts}}</b></p>
+            <sup>Accounts</sup>
+            <p class="large"><b>{{(index .stats 2).Channels}}</b></p>
+            <sup>Channels</sup>
+            <p class="large"><b>{{(index .stats 2).Contents}}</b></p>
+            <sup>Contents</sup>
+        </div>
+    </div>
+</div>
+{{end}}

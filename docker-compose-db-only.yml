@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  db:
+    image: mysql
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: 1234
+    ports: 
+      - "3306:3306"
+    volumes: 
+      - ~/mysql/vifa/:/var/lib/mysql

@@ -1,0 +1,29 @@
+svg {
+    width: 60px;
+}
+hr {
+    width: 80%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: var(--blue);
+}
+.overall {
+    font-size: 32px;
+    color: var(--green);
+    font-variant: small-caps;
+}
+.large {
+    font-size: 25px;
+}
+sup {
+    font-variant: small-caps;
+}
+#youtube {
+    --fill-col: red;
+}
+#reddit {
+    --fill-col: #ff4500;
+}
+#twitter {
+    --fill-col: #1da1f2;
+}

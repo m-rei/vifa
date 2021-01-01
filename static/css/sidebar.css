@@ -1,0 +1,121 @@
+.bgc-white {
+    background-color: var(--white);
+}
+.bgc-green {
+    background-color: var(--green);
+}
+.bgc-blue {
+    background-color: var(--blue);
+}
+.sidebar {
+    color: var(--white);
+}
+.sidebar-profile {
+    padding: 20px 0px;
+}
+.sidebar-profile .user,
+.sidebar-profile a .user {
+    width: 75px;
+    height: 75px;
+}
+.sidebar-profile a .settings,
+.sidebar-profile a .logout {
+    width: 35px;
+    height: 35px;
+}
+.sidebar li > * {
+    padding: 16px;
+}
+.sidebar li div {
+    user-select: none;
+}
+.sidebar li div svg {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    --fill-col: var(--green);
+}
+.sidebar li div img {
+    width: 20px;
+    height: 20px;
+}
+.sidebar li:hover div svg {
+    --fill-col:white;
+}
+.sidebar li.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--green);
+}
+.sidebar li.active::after {
+    background-color: var(--green);
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+}
+.sidebar li:hover #settings {
+    background-color: var(--blue-light);
+}
+.sidebar li:hover {
+    background-color: var(--green);
+}
+.content {
+    flex: 1 1 auto;
+    padding: 10px;
+    padding-top: 0;
+}
+@media screen and (min-width: 630px) {
+    .sidebar li {
+        text-align: left;
+    }
+    .sidebar li div img {
+        margin-left: 10px;
+    }
+    .sidebar ul {
+        flex-direction: row;
+    }
+    .sidebar li.active::after {
+        height: 0;
+    }
+    @media screen and (min-width: 768px) {
+        body {
+            flex-direction: row!important;
+        }
+        .sidebar {
+            width: 200px!important;
+            height: 100%!important;
+        }
+        .sidebar ul {
+            flex-direction: column;
+        }
+        .sidebar li {
+            justify-content: space-between;
+        }
+        .sidebar li.active::before {
+            content: "";
+            position: absolute;
+            width: 5px;
+            height: 100%;
+            background-color: var(--green);
+        }
+        .sidebar li div img {
+            margin-left: auto;
+        }
+        .sidebar li #settings {
+            visibility: hidden;
+        }
+        .sidebar li:hover #settings {
+            visibility: visible;
+        }
+        .content {
+            overflow: auto;
+        }
+    }
+}

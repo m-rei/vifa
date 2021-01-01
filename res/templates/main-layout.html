@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" class="h100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer" />
+    <title>{{.title}}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    {{range .css}}
+    <link rel="stylesheet" href="/static/css/{{.}}">
+    {{end}}
+    {{with .csrf}}
+    <meta name="csrf" id="csrf" content="{{.}}"/>
+    {{end}}
+    <link rel="icon" type="image/png" href="static/images/favicon.png">
+</head>
+<body class="flex f-col p-rel h100 m0 p0 bgc-white">
+    {{template "sidebar" .}}
+    <div class="content">
+        {{template "content" .}}
+    </div>
+    {{range .js}}
+        <script src="/static/js/{{.}}"></script>
+    {{end}}
+</body>
+</html>

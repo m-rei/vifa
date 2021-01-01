@@ -1,0 +1,37 @@
+{{define "account-select"}}
+<div class="select-wrapper f-grow mr1">
+    <select id="account-selection">
+        {{range .accounts}}
+            <option value="{{.ID}}" {{if $.selection}}{{if eq .ID $.selection}}selected{{end}}{{end}}>{{.Name}}</option>
+        {{end}}
+    </select>
+</div>
+{{end}}
+
+{{define "channel-table"}}
+<table id="channelTable" class="my4 w100">
+    <colgroup>
+        <col class="w100"><col>
+    </colgroup>
+    <tr>
+        <th>Channel {{with .channels}}({{$.channelCount}}){{end}}</th>
+        <th></th>
+    </tr>
+    {{range .channels}}
+    <tr>
+        <td>
+            <div class="flex f-row jc-start ai-center pointer"
+                onclick="window.open('{{.ExternalID}}', '_blank');">
+                <img id="profile-pic" src="{{.ProfilePic.String}}" class="mr4">
+                {{.Name}}
+            </div>
+        </td>
+        <td>
+            <button onclick="deleteChannelFromAccount('{{.ID}}');">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </td>
+    </tr>
+    {{end}}
+</table>
+{{end}}

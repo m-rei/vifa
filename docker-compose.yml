@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  web:
+    build: .
+    container_name: vifa
+    environment:
+      GOOGLE_OAUTH2_CLIENT_ID: <TODO>
+      GOOGLE_OAUTH2_CLIENT_SECRET: <TODO>
+      PORT: 8443
+      DB_USER: root
+      DB_PASS: 1234
+      DB_ADDRESS: db:3306
+    restart: always
+    volumes: 
+      - ./logs:/app/logs
+    ports:
+      - "8443:8443"
+    depends_on:
+      - db
+
+  db:
+    image: mysql
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: 1234
+    expose: 
+      - "3306"
+    ports:
+      - "3306:3306"
+    volumes: 
+      - ~/mysql/vifa/:/var/lib/mysql

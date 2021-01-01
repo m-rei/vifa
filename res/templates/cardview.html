@@ -1,0 +1,83 @@
+{{define "header"}}
+<div id="header" class="p0 p-sticky t0 p0">
+    <ul class="p0 flex f-row f-wrap mt0">
+        {{with .accounts}}
+        <li class="p2 active" data-id="*" data-kind="{{(index . 0).Kind}}"><i class="fas fa-star-of-life"></i></li>
+        {{end}}
+        {{range .accounts}}
+        <li class="p2" data-id="{{.ID}}" data-kind="{{.Kind}}">{{.Name}}</a></li>
+        {{end}}
+    </ul>
+</div>
+{{end}}
+
+{{define "pagination"}}
+<div id="pagination" class="flex f-row jc-center ai-center">
+    <button id="left" disabled><i class="fas fa-chevron-left"></i></button>
+    <span id="status">1/1</span>
+    <button id="right" disabled><i class="fas fa-chevron-right"></i></button>
+</div>
+{{end}}
+
+{{define "snapshot"}}
+<div class="flex f-row jc-center">
+    <p>snapshot: <b>{{.snapshot}}</b></p>
+</div>
+{{end}}
+
+{{define "carousel"}}
+    <div class="media-carousel">
+        <div class="images">
+            {{range $i, $e := .AllMedia}}
+            <img data-slide="{{$i}}" onclick="window.open('{{$e.URL}}', '_blank');"  src="{{$e.URL}}" {{if eq $i 0}}class="active"{{end}}></img>
+            {{end}}
+        </div>
+        <div class="indicators">
+            {{range $i, $e := .AllMedia}}
+            <i data-slide-to="{{$i}}" class="fas fa-circle {{if eq $i 0}}active{{end}}"></i>
+            {{end}}
+        </div>
+        <i data-slide="prev" class="left fas fa-chevron-left"></i>
+        <i data-slide="next" class="right fas fa-chevron-right"></i>
+    </div>
+{{end}}
+
+{{define "cards"}}
+<div id="cards" class="flex f-wrap jc-center pointer">
+    {{range .contents}}
+    <div class="card flex f-col ai-center m2 p2 pointer"
+    onclick="if (!event.target.parentElement.classList.contains('card')) {if (event.target != event.currentTarget) {return false; }}; window.open('{{.ExternalID}}', '_blank');">
+        {{if ge (len .AllMedia) 2}}
+            {{template "carousel" .}}
+        {{else}}
+        <div class="media">
+            {{if eq (len .AllMedia) 1}}
+                {{range .AllMedia}}
+                <img onclick="window.open('{{.URL}}', '_blank');" src="{{.URL}}"></img>
+                {{end}}
+            {{else}}
+            <img class="profile" src="{{.Channel.ProfilePic.String}}"></img>
+            {{end}}
+        </div>
+        {{end}}
+        <p>{{.Channel.Name}}</p>
+        <p class="title">{{.Title}}</p>
+        <p>{{.Date | fdate "2006.01.02 15:04:05"}}</p>
+    </div>
+    {{end}}
+</div>
+{{end}}
+
+{{define "cardview"}}
+    {{if eq (len .accounts) 0}}
+    <div class="flex f-col ai-center">
+        <p>you have no accounts.</p>
+        <a href="{{.kind}}-settings">start by creating one...</a>
+    </div>
+    {{else}}
+        {{template "header" .}}
+        {{template "pagination"}}
+        {{template "snapshot" .}}
+        {{template "cards" .}}
+    {{end}}
+{{end}}

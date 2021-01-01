@@ -1,0 +1,42 @@
+{{define "content"}}
+    {{block "settings" .}}
+    <main>
+        <article class="flex f-row jc-center">
+            <div>
+                <section id="" class="flex f-col">
+                    <div class="flex f-row jc-around ai-center my1">
+                        <label for="account-name">account</label>
+                        <input id="account-name" class="f-grow mx1" placeholder="any name for your vifa sub-account">
+                        <button id="btn-add-account" type="button" disabled><i class="fas fa-plus-square"></i></button>
+                    </div>
+                    <div class="flex f-row">
+                        {{template "account-select" .}}
+                        <button id="btn-del-account" type="button"><i class="fas fa-trash-alt"></i></i></button>
+                    </div>
+                </section>
+                {{if .opml}}
+                <div class="flex f-col ai-center my2">
+                    <div class="flex f-row jc-center my2">
+                        <button id="btn-opml-file">opml file</button>
+                        <input id="opml-file" class="d-none" type="file">
+                    </div>
+                    <p id="wait" class="d-none">uploading, parsing & fetching resources... please wait</p>
+                </div>
+                {{end}}
+                <section class="flex f-col">
+                    <div id="new-channel" class="flex f-col  jc-start my1">
+                        <div class="flex f-row ai-center">
+                            <label id="lbl-channel-id" for="channel-id" class="ml1">id</label>
+                            <input id="channel-id" class="f-grow mx1" placeholder="full URL for the channel" title="{{.channelHint}}">
+                            <button id="btn-add" type="button" disabled><i class="fas fa-plus-square"></i></button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </article>
+        <section>
+            {{template "channel-table" .}}
+        </section>
+    </main>
+    {{end}}
+{{end}}

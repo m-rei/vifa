@@ -1,0 +1,36 @@
+{{define "sidebar"}}
+<aside class="sidebar w100 h-auto of-auto bgc-blue f-const">
+    <nav>
+        <section class="sidebar-profile flex f-row jc-center ai-center">
+            {{with .user}}
+                <a href="/profile" class="a-nostyle">
+                    <div class="flex f-col jc-center ai-center">
+                        <img class="user rounded mx1" src="{{.Picture}}" title="{{.Email}}">
+                        <p>{{.Username}}</p>
+                    </div>
+                </a>
+                <a href="/logout"><img class="logout rounded" src="static/images/logout.svg" alt="logout" title="logout"></a>
+            {{else}}
+                <img class="user mx1" src="static/images/favicon.png">
+            {{end}}
+        </section>
+        <ul class="flex f-col p0">
+            {{range .media}}
+                <li class="{{if not $.user}}disabled{{end}} {{if .active}}active{{end}} flex f-row jc-between p-rel">
+                    <div class="flex f-row pointer f-grow" onclick="location.href='/{{.name}}';">
+                        <svg role="img" viewBox="0 0 24 24" style="fill:var(--fill-col);">
+                            <path d="{{.svgdata}}"/>
+                        </svg>
+                        {{.name}}
+                    </div>
+                    {{if $.user}}
+                    <div id="settings" class="flex f-row pointer" onclick="location.href='/{{.name}}-settings';">
+                        <img src="static/images/cog.png">
+                    </div>
+                    {{end}}
+                </li>
+            {{end}}
+        </ul>
+    </nav>
+</aside>
+{{end}}

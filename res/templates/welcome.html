@@ -1,0 +1,13 @@
+{{define "content"}}
+<main>
+    <article>
+        <section class="flex f-col ai-center">
+            <h1>VIFA</h1>
+            <p>Track social media feeds automatically</p>
+            {{if not .user}}
+                <button type="button" onclick="location.href='/login/oauth2'"><i class="fab fa-google mr4"></i>sign in via google</button>
+            {{end}}
+        </section>
+    </article>
+</main>
+{{end}}

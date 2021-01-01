@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "PreLaunch",
+            "dependsOn": ["CleanLogs", "DockerComposeUp"],
+        },
+        {
+            "label": "PostLaunch",
+            "dependsOn": ["DockerComposeDown"],
+        },
+        {
+            "label": "CleanLogs",
+            "command": "./logs/clear",
+            "type": "shell",
+        },
+        {
+            "label": "DockerComposeUp",
+            "command": "docker-compose -f docker-compose-db-only.yml up -d",
+            "type": "shell",
+        },
+        {
+            "label": "DockerComposeDown",
+            "command": "docker-compose down --remove-orphans",
+            "type": "shell",
+        }
+    ]
+}

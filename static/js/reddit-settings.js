@@ -1,0 +1,1 @@
+var kind = "reddit";
