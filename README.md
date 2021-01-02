@@ -64,7 +64,7 @@ you can create sub-accounts for each social media kind and add channels to them.
 
 a channel is the landing- or profile page for a specific social media kind. the input field's tooltip will show you examples of what you can input!
 
-channels are unique for all users of vifa. each channel's content gets periodically updated in one of the background tasks and the user of vifa always gets a snapshot view of the last update. since the channels are unique, each channel gets updated once, even if multiple users share it! removing a channel does not remove it entirely, as other channels may still be following it.
+channels are unique for all users of vifa. each channel's content gets periodically updated in one of the background tasks and the user of vifa always gets a snapshot view of the last update. since the channels are unique, each channel gets updated once, even if multiple users share it! removing a channel does not remove it entirely, as other accounts may still be following it.
 
 channel content older than a week gets removed, so you only have access to the latest content!
 
