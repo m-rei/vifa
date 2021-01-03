@@ -19,23 +19,22 @@ type TaskLastRunFunc func(kind string) time.Time
 // This is the central place for all routes!
 func SetupRoutes(s *server.Server, router *httprouter.Router, taskLastRunFunc TaskLastRunFunc) {
 	middlewares := []func(http.HandlerFunc) http.HandlerFunc{
-		middleware.Recover,
 		s.Sessions.SessionMiddleware,
 		middleware.AutoDetectContentType,
 		middleware.Minifier{M: s.Minifier}.MinifierMiddleware,
 		middleware.GzipMiddleware,
+		middleware.Recover,
 	}
 	middlewaresEx := []func(http.HandlerFunc) http.HandlerFunc{
-		middleware.Recover,
 		s.Sessions.SessionMiddleware,
 		s.Sessions.AuthorizedMiddleware,
 		middleware.DefaultHeaders,
 		middleware.AutoDetectContentType,
 		middleware.Minifier{M: s.Minifier}.MinifierMiddleware,
 		middleware.GzipMiddleware,
+		middleware.Recover,
 	}
 	middlewaresExCSRF := []func(http.HandlerFunc) http.HandlerFunc{
-		middleware.Recover,
 		s.Sessions.SessionMiddleware,
 		s.Sessions.AuthorizedMiddleware,
 		s.Sessions.CsrfTokenValidator,
@@ -43,6 +42,7 @@ func SetupRoutes(s *server.Server, router *httprouter.Router, taskLastRunFunc Ta
 		middleware.AutoDetectContentType,
 		middleware.Minifier{M: s.Minifier}.MinifierMiddleware,
 		middleware.GzipMiddleware,
+		middleware.Recover,
 	}
 
 	// routes
