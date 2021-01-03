@@ -469,7 +469,7 @@ func (r *mySQLContentRepository) LoadContentFor(userID int64, kind string, accID
 		c.id, c.title, c.date, c.external_id, c.channel_id,
 		m.id, m.url, m.content_id
 	FROM (
-		SELECT c2.* 
+		SELECT DISTINCT c2.* 
 		FROM content c2
 		INNER JOIN channel ch2 ON c2.channel_id = ch2.id
 		INNER JOIN account_channel ac2 ON ac2.channel_id = ch2.id
