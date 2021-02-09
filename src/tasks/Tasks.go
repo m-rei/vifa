@@ -267,10 +267,12 @@ func twitterTask(channel *models.Channel, wg *sync.WaitGroup, dateCutoff *time.T
 
 	var err error
 	var resp *http.Response
+	nitterInstance := ""
 
 	for _, ni := range util.NitterInstances {
 		resp, err = http.Get("https://" + ni + "/" + channel.ExternalID + "/media/rss")
 		if resp.StatusCode >= 200 && resp.StatusCode < 400 && err == nil {
+			nitterInstance = ni
 			break
 		}
 	}
@@ -322,7 +324,11 @@ func twitterTask(channel *models.Channel, wg *sync.WaitGroup, dateCutoff *time.T
 		var content models.Content
 		content.ChannelID = channel.ID
 		content.Title = item.Creator + "-" + item.Title
-		content.ExternalID = strings.Replace(item.Link, "https://nitter.net/", "", 1)
+		hPrefix := "http"
+		if strings.HasPrefix(item.Link, "https") {
+			hPrefix = "https"
+		}
+		content.ExternalID = strings.Replace(item.Link, hPrefix+"://"+nitterInstance+"/", "", 1)
 		date, err := parseTwitterTimeStr(item.PubDate, loc)
 		if err != nil {
 			logging.Println(logging.Info, err)
