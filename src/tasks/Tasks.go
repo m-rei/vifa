@@ -265,7 +265,15 @@ func TwitterBackgroundTask(stopSignal <-chan bool, lastRun map[string]time.Time,
 func twitterTask(channel *models.Channel, wg *sync.WaitGroup, dateCutoff *time.Time, loc *time.Location, services *services.ServiceCollection) {
 	defer wg.Done()
 
-	resp, err := http.Get("https://nitter.net/" + channel.ExternalID + "/media/rss")
+	var err error
+	var resp *http.Response
+
+	for _, ni := range util.NitterInstances {
+		resp, err = http.Get("https://" + ni + "/" + channel.ExternalID + "/media/rss")
+		if resp.StatusCode >= 200 && resp.StatusCode < 400 && err == nil {
+			break
+		}
+	}
 	if err != nil {
 		logging.Println(logging.Error, "Channel:", channel.Name, "--Error: get() error!")
 		logging.Println(logging.Error, err)

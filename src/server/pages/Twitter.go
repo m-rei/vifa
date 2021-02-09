@@ -8,6 +8,7 @@ import (
 	"regexp"
 	"visual-feed-aggregator/src/database/models"
 	"visual-feed-aggregator/src/server"
+	"visual-feed-aggregator/src/util"
 	"visual-feed-aggregator/src/util/logging"
 )
 
@@ -104,12 +105,21 @@ func TwitterMetaDataProvider(channelID string) (string, string, string, string) 
 }
 
 func queryTwitterProfilePic(externalID string) string {
-	url := "https://nitter.net/" + externalID + "/rss"
-	resp, err := http.Get(url)
+	var resp *http.Response = nil
+	var err error
+	url := ""
+	for _, ni := range util.NitterInstances {
+		url = "https://" + ni + "/" + externalID + "/rss"
+		resp, err = http.Get(url)
+		if resp.StatusCode >= 200 && resp.StatusCode < 400 && err == nil {
+			break
+		}
+	}
 	if err != nil {
 		logging.Println(logging.Info, err)
 		return ""
 	}
+
 	defer resp.Body.Close()
 
 	if resp.StatusCode < 200 || resp.StatusCode >= 400 {
@@ -150,7 +160,14 @@ func extractTwitterExternalID(data string) string {
 	res := twitterRegEx.FindAllStringSubmatch(data, -1)
 	if len(res) > 0 {
 		ret := res[0][1]
-		if err := httpCanGet("GET", "https://nitter.net/"+ret); err != nil { // head is not supported
+		var err error
+		for _, ni := range util.NitterInstances {
+			err = httpCanGet("GET", "https://"+ni+"/"+ret)
+			if err == nil {
+				break
+			}
+		}
+		if err != nil { // head is not supported
 			logging.Println(logging.Info, err)
 			return ""
 		}
