@@ -6,7 +6,7 @@ import "net/http"
 func DefaultHeaders(f http.HandlerFunc) http.HandlerFunc {
 	return func(rw http.ResponseWriter, r *http.Request) {
 		f(rw, r)
-		rw.Header().Set("Content-Security-Policy", "img-src https: data:;"+
+		rw.Header().Set("Content-Security-Policy", "img-src http: https: data:;"+
 			"font-src https: data:;"+
 			"connect-src https: data:;")
 		rw.Header().Set("X-XSS-Protection", "1; mode=blockFilter") // for legacy browsers, which dont implement content security policy fully yet
