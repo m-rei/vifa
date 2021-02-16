@@ -1,10 +1,8 @@
 # **vifa** - **vi**sual **f**eed **a**ggregator
 
-have media content of multiple platforms aggregated in one place - vifa!
+automatically aggregate media content from multiple social media platforms in one place!
 
-this little app periodically pulls the feeds of the people you follow and lets you preview them in a grid view.
-
-with one click you are either redirected to the image or to the post where its been linked!
+this little webapp periodically pulls feeds of people you follow and lets you preview & visit their content.
 
 ## what it looks like
 
