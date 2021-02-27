@@ -271,7 +271,7 @@ func twitterTask(channel *models.Channel, wg *sync.WaitGroup, dateCutoff *time.T
 
 	for _, ni := range util.NitterInstances {
 		resp, err = http.Get("https://" + ni + "/" + channel.ExternalID + "/media/rss")
-		if resp.StatusCode >= 200 && resp.StatusCode < 400 && err == nil {
+		if err == nil && resp.StatusCode >= 200 && resp.StatusCode < 400 {
 			nitterInstance = ni
 			break
 		}
