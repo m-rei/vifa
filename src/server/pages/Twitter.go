@@ -111,7 +111,7 @@ func queryTwitterProfilePic(externalID string) string {
 	for _, ni := range util.NitterInstances {
 		url = "https://" + ni + "/" + externalID + "/rss"
 		resp, err = http.Get(url)
-		if resp.StatusCode >= 200 && resp.StatusCode < 400 && err == nil {
+		if err == nil && resp.StatusCode >= 200 && resp.StatusCode < 400 {
 			break
 		}
 	}
